@@ -25,13 +25,22 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Create
-view_wport[0] = global.gameWidth;
-view_hport[0] = global.gameHeight;
-view_wview[0] = global.gameWidth;
-view_hview[0] = global.gameHeight;
-display_set_gui_size(global.gameWidth, global.gameHeight);
-room_speed = 60;
+            <string>/// Create Variables
+
+movement_state = P_STILL;
+spdx = 0;
+spdy = 0;
+dirx = 0;
+
+max_fall = 3;
+jump_spd = -5;
+grav = 0.05;
+
+max_hspeed = 3;
+h_amount = 0.5;
+
+image_speed = 0.1;
+
 </string>
           </argument>
         </arguments>
@@ -48,25 +57,37 @@ room_speed = 60;
         <exetype>2</exetype>
         <functionname></functionname>
         <codestring></codestring>
-        <whoName>self</whoName>
+        <whoName>other</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
-if (window_get_height() != global.gameHeight*global.zoom
-    &amp;&amp; window_get_width() != global.gameWidth*global.zoom
-    &amp;&amp; !window_get_fullscreen())
-{
-    window_set_size(global.gameWidth*global.zoom, global.gameHeight*global.zoom);
-    surface_resize(application_surface, global.gameWidth, global.gameHeight);
-    display_reset(0, false);
+            <string>/// Movement
+
+spdx = lerp(spdx, dirx*max_hspeed, h_amount);
+spdy = lerp(spdy, max_fall, grav); 
+
+// Horizontal
+repeat (abs(spdx)) {
+    if (!place_meeting(x + sign(spdx), y,  obj_solid)) {
+        x += sign(spdx);
+    }
+    else {
+        spdx = 0;
+        break;
+    }
 }
 
-if (instance_exists(obj_player)) {
-    view_xview[0] = obj_player.x - view_wview[0]/2;
-    view_yview[0] = obj_player.y - view_hview[0]/2-30;
+// Vertical
+repeat (abs(spdy)) {
+    if (!place_meeting(x , y + sign(spdy),  obj_solid)) {
+        y += sign(spdy);
+    }
+    else {
+        spdy = 0;
+        break;
+    }
 }
 </string>
           </argument>

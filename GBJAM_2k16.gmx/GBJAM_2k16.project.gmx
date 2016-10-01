@@ -5,16 +5,54 @@
   </Configs>
   <NewExtensions/>
   <sounds name="sound"/>
-  <sprites name="sprites"/>
+  <sprites name="sprites">
+    <sprites name="player">
+      <sprite>sprites\spr_pstill</sprite>
+      <sprite>sprites\spr_pwalk</sprite>
+      <sprite>sprites\spr_pjump</sprite>
+    </sprites>
+    <sprites name="platforms">
+      <sprite>sprites\spr_platform</sprite>
+      <sprite>sprites\spr_platform_des</sprite>
+    </sprites>
+    <sprites name="ball">
+      <sprite>sprites\spr_ball_normal</sprite>
+      <sprite>sprites\spr_ball_crack0</sprite>
+      <sprite>sprites\spr_ball_crack1</sprite>
+      <sprite>sprites\spr_ball_crack2</sprite>
+      <sprite>sprites\spr_ball_destroy</sprite>
+    </sprites>
+  </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\move.gml</script>
+  </scripts>
   <objects name="objects">
-    <object>objects\obj_init_game</object>
-    <object>objects\obj_camera</object>
+    <objects name="Controllers">
+      <object>objects\obj_camera</object>
+      <object>objects\obj_init_game</object>
+      <object>objects\obj_gameController</object>
+    </objects>
+    <objects name="Actors">
+      <object>objects\obj_player</object>
+      <object>objects\obj_solid</object>
+      <object>objects\obj_ball</object>
+      <object>objects\obj_parent_actor</object>
+    </objects>
+    <objects name="Platforms">
+      <object>objects\obj_platform</object>
+      <object>objects\obj_plat_desintegrate</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_test_pedrao</room>
   </rooms>
+  <constants number="3">
+    <constant name="P_JUMPING">0</constant>
+    <constant name="P_WALKING">1</constant>
+    <constant name="P_STILL">2</constant>
+  </constants>
   <help>
     <rtf>help.rtf</rtf>
   </help>
