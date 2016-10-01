@@ -77,9 +77,11 @@ else if (keyboard_check(vk_left)) {
     movement_state = P_STILL;
 }
 
-if (keyboard_check_pressed(vk_space)) {
+if (keyboard_check_pressed(vk_space) &amp;&amp; place_meeting(x, y+1, obj_solid)) {
     movement_state = P_JUMPING;
     spdy = jump_spd;
+    instance_create(x+random_range(-1,1), y+random_range(-1,1), obj_smoke);
+    instance_create(x+random_range(-1,1), y+random_range(-1,1), obj_smoke);
 }
 </string>
           </argument>
@@ -152,8 +154,13 @@ repeat (abs(amounty)) {
             <kind>1</kind>
             <string>/// Animation
 
-if (dirx == 0) {
-    sprite_index = spr_pstill
+if (!place_meeting(x, y+1, obj_solid)) {
+    sprite_index = spr_pjump;
+    if (dirx !=0) image_xscale = dirx;
+}
+else if (dirx == 0) {
+    if(keyboard_check(vk_down)) sprite_index = spr_plookdown;
+    else sprite_index = spr_pstill
 }
 else {
     sprite_index = spr_pwalk;

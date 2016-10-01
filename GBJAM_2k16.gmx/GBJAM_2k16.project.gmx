@@ -10,6 +10,7 @@
       <sprite>sprites\spr_pstill</sprite>
       <sprite>sprites\spr_pwalk</sprite>
       <sprite>sprites\spr_pjump</sprite>
+      <sprite>sprites\spr_plookdown</sprite>
     </sprites>
     <sprites name="platforms">
       <sprite>sprites\spr_platform</sprite>
@@ -21,6 +22,9 @@
       <sprite>sprites\spr_ball_crack1</sprite>
       <sprite>sprites\spr_ball_crack2</sprite>
       <sprite>sprites\spr_ball_destroy</sprite>
+    </sprites>
+    <sprites name="effects">
+      <sprite>sprites\spr_smoke</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -43,6 +47,9 @@
     <objects name="Platforms">
       <object>objects\obj_platform</object>
       <object>objects\obj_plat_desintegrate</object>
+    </objects>
+    <objects name="effects">
+      <object>objects\obj_smoke</object>
     </objects>
   </objects>
   <rooms name="rooms">

@@ -27,17 +27,21 @@
             <kind>1</kind>
             <string>/// Create Variables
 
-movement_state = P_STILL;
+life = 3;
+
 spdx = 0;
 spdy = 0;
 dirx = 0;
 
 max_fall = 3;
-vspd = 10;
+vspd = 12;
 grav = 0.10;
 
-hspd = 3;
+hspd = 5;
 h_amount = 0.01;
+
+targetX = 0;
+targetY = 0;
 
 minKickDist = 30;
 
@@ -67,11 +71,15 @@ image_speed = 0.1;
             <kind>1</kind>
             <string>/// Movement
 
-if(place_meeting(x+sign(spdx), y, obj_solid)) spdx*=-0.8;
+if(place_meeting(x+sign(spdx), y, obj_solid)) {
+    spdx*=-1;
+    x+=sign(spdx);    
+}
+
 if(place_meeting(x, y+1, obj_solid)) spdx = lerp(spdx, 0, 3*h_amount);
 else spdx = lerp(spdx, 0, h_amount);
 
-spdy = lerp(spdy, max_fall, grav); 
+spdy = lerp(spdy, max_fall, grav);
 
 // Horizontal
 repeat (abs(spdx)) {
@@ -116,7 +124,9 @@ repeat (abs(spdy)) {
             <kind>1</kind>
             <string>/// Ball Kick
 
-if (instance_exists(obj_player) &amp;&amp; (sqrt(sqr((obj_player.x-x)) + sqr((obj_player.y-y))) &lt;=minKickDist)) {
+if (instance_exists(obj_player) 
+    &amp;&amp; (sqrt(sqr((obj_player.x-x)) + sqr((obj_player.y-y))) &lt;=minKickDist)) {
+    
     if (keyboard_check_pressed(ord("X"))) {
         if (keyboard_check(vk_right)) {
             spdx = hspd;
@@ -131,6 +141,31 @@ if (instance_exists(obj_player) &amp;&amp; (sqrt(sqr((obj_player.x-x)) + sqr((ob
             spdy = vspd;
         }
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Death
+
+if (life == 0 &amp;&amp; sprite_index == spr_ball_destroy &amp;&amp; image_index &gt;=6) {
+    // Handle Death
 }
 </string>
           </argument>
@@ -159,6 +194,40 @@ if (instance_exists(obj_player) &amp;&amp; (sqrt(sqr((obj_player.x-x)) + sqr((ob
 draw_set_colour(c_green);
 draw_circle(x, y, minKickDist-6, true);
 draw_self();
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Sprite Update
+
+if (life == 0) {
+    sprite_index = spr_ball_destroy;
+}
+else if(life == 3) {
+    draw_sprite(spr_ball_crack0, 0, x, y);
+}
+else if(life == 2) {
+    draw_sprite(spr_ball_crack1, 0, x, y);
+}
+else if(life == 1) {
+    draw_sprite(spr_ball_crack2, 0, x, y);
+}
 </string>
           </argument>
         </arguments>
