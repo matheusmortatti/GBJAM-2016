@@ -8,6 +8,13 @@
   <sprites name="sprites"/>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <objects name="objects">
+    <object>objects\obj_init_game</object>
+    <object>objects\obj_camera</object>
+  </objects>
+  <rooms name="rooms">
+    <room>rooms\room_test_pedrao</room>
+  </rooms>
   <help>
     <rtf>help.rtf</rtf>
   </help>
