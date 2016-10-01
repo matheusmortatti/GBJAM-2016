@@ -39,7 +39,7 @@ grav = 0.10;
 hspd = 3;
 h_amount = 0.01;
 
-minKickDist = 20;
+minKickDist = 30;
 
 image_speed = 0.1;
 
@@ -67,7 +67,10 @@ image_speed = 0.1;
             <kind>1</kind>
             <string>/// Movement
 
-spdx = lerp(spdx, 0, h_amount);
+if(place_meeting(x+sign(spdx), y, obj_solid)) spdx*=-0.8;
+if(place_meeting(x, y+1, obj_solid)) spdx = lerp(spdx, 0, 3*h_amount);
+else spdx = lerp(spdx, 0, h_amount);
+
 spdy = lerp(spdy, max_fall, grav); 
 
 // Horizontal
@@ -129,6 +132,33 @@ if (instance_exists(obj_player) &amp;&amp; (sqrt(sqr((obj_player.x-x)) + sqr((ob
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Draw Circle
+
+draw_set_colour(c_green);
+draw_circle(x, y, minKickDist-6, true);
+draw_self();
 </string>
           </argument>
         </arguments>

@@ -33,8 +33,8 @@ spdy = 0;
 dirx = 1;
 
 max_fall = 3;
-jump_spd = -5;
-grav = 0.05;
+jump_spd = -10;
+grav = 0.10;
 
 max_hspeed = 3;
 h_amount = 0.3;
