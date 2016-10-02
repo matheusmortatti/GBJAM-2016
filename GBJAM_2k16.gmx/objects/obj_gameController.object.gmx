@@ -26,6 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>if(keyboard_check_pressed(vk_escape)) game_end();
+
+if (global.pause &gt; 0) {
+    instance_deactivate_all(true);
+    global.pause -=1;
+}
+else instance_activate_all();
 </string>
           </argument>
         </arguments>

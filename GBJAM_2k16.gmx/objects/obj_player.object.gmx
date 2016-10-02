@@ -27,6 +27,8 @@
             <kind>1</kind>
             <string>/// Create Variables
 
+grounded = false;
+
 movement_state = P_STILL;
 spdx = 0;
 spdy = 0;
@@ -77,7 +79,7 @@ else if (keyboard_check(vk_left)) {
     movement_state = P_STILL;
 }
 
-if (keyboard_check_pressed(vk_space) &amp;&amp; place_meeting(x, y+1, obj_solid)) {
+if (keyboard_check_pressed(ord("C")) &amp;&amp; grounded) {
     movement_state = P_JUMPING;
     spdy = jump_spd;
     instance_create(x+random_range(-1,1), y+random_range(-1,1), obj_smoke);
@@ -154,7 +156,7 @@ repeat (abs(amounty)) {
             <kind>1</kind>
             <string>/// Animation
 
-if (!place_meeting(x, y+1, obj_solid)) {
+if (!grounded) {
     sprite_index = spr_pjump;
     if (dirx !=0) image_xscale = dirx;
 }
@@ -166,6 +168,29 @@ else {
     sprite_index = spr_pwalk;
     image_xscale = dirx;
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Grounded
+
+grounded = place_meeting(x, y+1, obj_solid);
 </string>
           </argument>
         </arguments>

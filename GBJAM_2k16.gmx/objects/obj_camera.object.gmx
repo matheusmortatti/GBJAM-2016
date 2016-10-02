@@ -65,8 +65,15 @@ if (window_get_height() != global.gameHeight*global.zoom
 }
 
 if (instance_exists(obj_player)) {
-    view_xview[0] = obj_player.x - view_wview[0]/2;
-    view_yview[0] = obj_player.y - view_hview[0]/2-20;
+    if (global.shake &gt;0) {
+        view_xview[0] = obj_player.x - view_wview[0]/2 + random_range(-1, 1);
+        view_yview[0] = obj_player.y - view_hview[0]/2-20 + random_range(-1, 1);
+        global.shake-=1;
+    }
+    else {
+        view_xview[0] = obj_player.x - view_wview[0]/2;
+        view_yview[0] = obj_player.y - view_hview[0]/2-20;
+    }
 }
 </string>
           </argument>

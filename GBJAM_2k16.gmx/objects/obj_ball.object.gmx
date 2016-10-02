@@ -72,7 +72,7 @@ image_speed = 0.1;
             <string>/// Movement
 
 if(place_meeting(x+sign(spdx), y, obj_solid)) {
-    spdx*=-1;
+    spdx*=-0.7;
     x+=sign(spdx);    
 }
 
@@ -130,15 +130,19 @@ if (instance_exists(obj_player)
     if (keyboard_check_pressed(ord("X"))) {
         if (keyboard_check(vk_right)) {
             spdx = hspd;
+            global.pause=3;
         }
         else if (keyboard_check(vk_left)) {
             spdx = -hspd;
+            global.shake=3;
         }
         if (keyboard_check(vk_up)) {
             spdy = -vspd;
+            global.shake=3;
         }
         else if (keyboard_check(vk_down)) {
             spdy = vspd;
+            global.shake=3;
         }
     }
 }
