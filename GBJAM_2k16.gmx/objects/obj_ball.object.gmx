@@ -130,7 +130,7 @@ if (instance_exists(obj_player)
     if (keyboard_check_pressed(ord("X"))) {
         if (keyboard_check(vk_right)) {
             spdx = hspd;
-            global.pause=3;
+            global.shake=3;
         }
         else if (keyboard_check(vk_left)) {
             spdx = -hspd;
